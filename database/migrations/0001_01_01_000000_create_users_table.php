@@ -17,12 +17,8 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->boolean('is_admin')->default(false);
             $table->rememberToken();
-            $table->boolean('twitter_account_connected')->default(false);
-            $table->string('twitter_account_id')->nullable();
-            $table->text('twitter_access_token')->nullable();
-            $table->text('twitter_access_token_secret')->nullable();
-            $table->text('twitter_refresh_token')->nullable();
             $table->timestamps();
         });
 

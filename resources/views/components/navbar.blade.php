@@ -13,11 +13,11 @@
                 <!-- Logo/Brand -->
                 <a href="/home" class="flex items-center text-indigo-600 lg:w-64 ml-3 lg:ml-0">
                     <div class="w-10 h-10 bg-indigo-600 rounded-lg flex items-center justify-center mr-3">
-                        <i class='bx bx-video text-2xl text-white'></i>
+                        <i class='bx bx-plus-medical text-2xl text-white'></i>
                     </div>
                     <div>
-                        <span class="font-bold text-xl text-gray-900">VidEngager</span>
-                        <p class="text-xs text-gray-500 -mt-1">Video Marketing Platform</p>
+                        <span class="font-bold text-xl text-gray-900">Visiting Angels</span>
+                        <p class="text-xs text-gray-500 -mt-1">Admin</p>
                     </div>
                 </a>
                 

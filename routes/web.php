@@ -2,12 +2,18 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PasswordResetController;
+use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\BlogController;
+use App\Http\Controllers\OpeningController;
+use App\Http\Controllers\OpeningApplicationController;
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\TestimonialController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\TwitterAuthController;
 
 Route::get('/', function () {
-    return view('welcome');
+    $services = \App\Models\Service::query()->where('is_active', true)->latest()->take(3)->get();
+    return view('welcome', compact('services'));
 });
 
 
@@ -48,5 +54,52 @@ Route::middleware(['auth'])->group(function () {
 
 });
 
-Route::get('/connect/twitter', [TwitterAuthController::class, 'redirectToTwitter'])->name('twitter.connect');
-Route::get('/connect/twitter/callback', [TwitterAuthController::class, 'handleTwitterCallback'])->name('twitter.callback');
+// Public Site
+Route::get('/about', function () { return view('about'); })->name('about');
+Route::get('/contact', [ContactController::class, 'index'])->name('contact');
+Route::post('/contact', [ContactController::class, 'send'])->name('contact.send');
+Route::get('/services', [ServiceController::class, 'index'])->name('services.index');
+Route::get('/services/{service:slug}', [ServiceController::class, 'show'])->name('services.show');
+Route::get('/blog', [BlogController::class, 'index'])->name('blog.index');
+Route::get('/blog/{post:slug}', [BlogController::class, 'show'])->name('blog.show');
+Route::get('/openings', [OpeningController::class, 'index'])->name('openings.index');
+Route::get('/openings/{opening:slug}', [OpeningController::class, 'show'])->name('openings.show');
+Route::post('/openings/{opening:slug}/apply', [OpeningApplicationController::class, 'store'])->name('openings.apply');
+
+// Admin
+Route::middleware(['auth','admin'])->prefix('admin')->name('admin.')->group(function () {
+    Route::get('/services', [ServiceController::class, 'adminIndex'])->name('services.index');
+    Route::get('/services/create', [ServiceController::class, 'create'])->name('services.create');
+    Route::post('/services', [ServiceController::class, 'store'])->name('services.store');
+    Route::get('/services/{service}/edit', [ServiceController::class, 'edit'])->name('services.edit');
+    Route::put('/services/{service}', [ServiceController::class, 'update'])->name('services.update');
+    Route::delete('/services/{service}', [ServiceController::class, 'destroy'])->name('services.destroy');
+    Route::patch('/services/{service}/toggle', [ServiceController::class, 'toggle'])->name('services.toggle');
+
+    Route::get('/blog', [BlogController::class, 'adminIndex'])->name('blog.index');
+    Route::get('/blog/create', [BlogController::class, 'create'])->name('blog.create');
+    Route::post('/blog', [BlogController::class, 'store'])->name('blog.store');
+    Route::get('/blog/{post}/edit', [BlogController::class, 'edit'])->name('blog.edit');
+    Route::put('/blog/{post}', [BlogController::class, 'update'])->name('blog.update');
+    Route::delete('/blog/{post}', [BlogController::class, 'destroy'])->name('blog.destroy');
+    Route::patch('/blog/{post}/toggle', [BlogController::class, 'toggle'])->name('blog.toggle');
+
+    Route::get('/openings', [OpeningController::class, 'adminIndex'])->name('openings.index');
+    Route::get('/openings/create', [OpeningController::class, 'create'])->name('openings.create');
+    Route::post('/openings', [OpeningController::class, 'store'])->name('openings.store');
+    Route::get('/openings/{opening}/edit', [OpeningController::class, 'edit'])->name('openings.edit');
+    Route::put('/openings/{opening}', [OpeningController::class, 'update'])->name('openings.update');
+    Route::delete('/openings/{opening}', [OpeningController::class, 'destroy'])->name('openings.destroy');
+
+    Route::get('/applications', [OpeningApplicationController::class, 'adminIndex'])->name('applications.index');
+    Route::put('/applications/{application}', [OpeningApplicationController::class, 'updateStatus'])->name('applications.update');
+
+    // Testimonials
+    Route::get('/testimonials', [TestimonialController::class, 'index'])->name('testimonials.index');
+    Route::get('/testimonials/create', [TestimonialController::class, 'create'])->name('testimonials.create');
+    Route::post('/testimonials', [TestimonialController::class, 'store'])->name('testimonials.store');
+    Route::get('/testimonials/{testimonial}/edit', [TestimonialController::class, 'edit'])->name('testimonials.edit');
+    Route::put('/testimonials/{testimonial}', [TestimonialController::class, 'update'])->name('testimonials.update');
+    Route::delete('/testimonials/{testimonial}', [TestimonialController::class, 'destroy'])->name('testimonials.destroy');
+    Route::patch('/testimonials/{testimonial}/toggle', [TestimonialController::class, 'toggle'])->name('testimonials.toggle');
+});

@@ -40,6 +40,41 @@
             <ul class="font-medium flex flex-col gap-1">
                 
                 <li>
+                    <a href="{{ route('admin.services.index') }}"
+                        class="flex items-center gap-2 px-4 py-2 rounded-lg transition-colors group {{ request()->routeIs('admin.services.*') ? 'bg-white text-black shadow font-semibold' : 'text-white hover:bg-gray-500 hover:text-white' }}">
+                        <i class="bx bx-briefcase text-xl {{ request()->routeIs('admin.services.*') ? 'text-black' : 'text-indigo-200 group-hover:text-white' }}"></i>
+                        <span>Services</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('admin.blog.index') }}"
+                        class="flex items-center gap-2 px-4 py-2 rounded-lg transition-colors group {{ request()->routeIs('admin.blog.*') ? 'bg-white text-black shadow font-semibold' : 'text-white hover:bg-gray-500 hover:text-white' }}">
+                        <i class="bx bx-news text-xl {{ request()->routeIs('admin.blog.*') ? 'text-black' : 'text-indigo-200 group-hover:text-white' }}"></i>
+                        <span>Blog</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('admin.openings.index') }}"
+                        class="flex items-center gap-2 px-4 py-2 rounded-lg transition-colors group {{ request()->routeIs('admin.openings.*') ? 'bg-white text-black shadow font-semibold' : 'text-white hover:bg-gray-500 hover:text-white' }}">
+                        <i class="bx bx-briefcase-alt-2 text-xl {{ request()->routeIs('admin.openings.*') ? 'text-black' : 'text-indigo-200 group-hover:text-white' }}"></i>
+                        <span>Openings</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('admin.testimonials.index') }}"
+                        class="flex items-center gap-2 px-4 py-2 rounded-lg transition-colors group {{ request()->routeIs('admin.testimonials.*') ? 'bg-white text-black shadow font-semibold' : 'text-white hover:bg-gray-500 hover:text-white' }}">
+                        <i class="bx bx-message-rounded-dots text-xl {{ request()->routeIs('admin.testimonials.*') ? 'text-black' : 'text-indigo-200 group-hover:text-white' }}"></i>
+                        <span>Testimonials</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('admin.applications.index') }}"
+                        class="flex items-center gap-2 px-4 py-2 rounded-lg transition-colors group {{ request()->routeIs('admin.applications.*') ? 'bg-white text-black shadow font-semibold' : 'text-white hover:bg-gray-500 hover:text-white' }}">
+                        <i class="bx bx-user-check text-xl {{ request()->routeIs('admin.applications.*') ? 'text-black' : 'text-indigo-200 group-hover:text-white' }}"></i>
+                        <span>Applications</span>
+                    </a>
+                </li>
+                <li>
                     <a href="{{ route('auth.logout') }}"
                         class="flex items-center gap-2 px-4 py-2 rounded-lg transition-colors group text-red-200 hover:bg-red-50 hover:text-red-700">
                         <i class='bx bx-log-out text-xl'></i>

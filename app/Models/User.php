@@ -21,6 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'is_admin',
         'twitter_account_connected',
         'twitter_account_id',
         'twitter_access_token',
@@ -48,6 +49,7 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'twitter_account_connected' => 'boolean',
+            'is_admin' => 'boolean',
         ];
     }
 
