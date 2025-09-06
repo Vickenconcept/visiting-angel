@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\BlogPost;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Cloudinary\Cloudinary;
 
 class BlogController extends Controller
 {
@@ -37,7 +38,7 @@ class BlogController extends Controller
             'title' => 'required|string|max:255',
             'excerpt' => 'nullable|string|max:500',
             'content' => 'required|string',
-            'image_url' => 'nullable|url',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'is_published' => 'in:0,1',
             'published_at' => 'nullable|date',
         ]);
@@ -46,6 +47,16 @@ class BlogController extends Controller
         $validated['is_published'] = $request->boolean('is_published');
         if ($validated['is_published'] && empty($validated['published_at'])) {
             $validated['published_at'] = now();
+        }
+
+        // Handle image upload to Cloudinary
+        if ($request->hasFile('image')) {
+            $cloudinary = new Cloudinary();
+            $cloudinaryResponse = $cloudinary->uploadApi()->upload($request->file('image')->getRealPath(), [
+                'resource_type' => 'image',
+                'folder' => 'visiting-angels/blog'
+            ]);
+            $validated['image_url'] = $cloudinaryResponse['secure_url'];
         }
 
         BlogPost::create($validated);
@@ -63,7 +74,7 @@ class BlogController extends Controller
             'title' => 'required|string|max:255',
             'excerpt' => 'nullable|string|max:500',
             'content' => 'required|string',
-            'image_url' => 'nullable|url',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'is_published' => 'in:0,1',
             'published_at' => 'nullable|date',
         ]);
@@ -72,6 +83,16 @@ class BlogController extends Controller
         $validated['is_published'] = $request->boolean('is_published');
         if ($validated['is_published'] && empty($validated['published_at'])) {
             $validated['published_at'] = now();
+        }
+
+        // Handle image upload to Cloudinary
+        if ($request->hasFile('image')) {
+            $cloudinary = new Cloudinary();
+            $cloudinaryResponse = $cloudinary->uploadApi()->upload($request->file('image')->getRealPath(), [
+                'resource_type' => 'image',
+                'folder' => 'visiting-angels/blog'
+            ]);
+            $validated['image_url'] = $cloudinaryResponse['secure_url'];
         }
 
         $post->update($validated);

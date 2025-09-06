@@ -68,7 +68,7 @@
         {{-- <div id="main-section" class="h-full sm:ml-64 bg-gray-100 pt-20 overflow-y-hidden relative flex "> --}}
             <div>
                 <button id="toggle-btn"
-                class=" p-2 hidden lg:flex rounded-r-md cursor-pointer bg-black text-white absolute top-5 -left-3 z-40 flex items-center justify-center">
+                class=" p-2 hidden lg:flex rounded-r-md cursor-pointer bg-blue-900 text-white absolute top-5 -left-3 z-40 flex items-center justify-center">
                 <i class='bx  bx-sidebar ml-2 text-xl'  ></i> 
             </button>
         </div>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Testimonial;
 use Illuminate\Http\Request;
+use Cloudinary\Cloudinary;
 
 class TestimonialController extends Controller
 {
@@ -24,11 +25,22 @@ class TestimonialController extends Controller
             'name' => 'required|string|max:255',
             'role' => 'nullable|string|max:255',
             'quote' => 'required|string',
-            'image_url' => 'nullable|url',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'is_published' => 'in:0,1',
         ]);
 
         $validated['is_published'] = $request->boolean('is_published');
+
+        // Handle image upload to Cloudinary
+        if ($request->hasFile('image')) {
+            $cloudinary = new Cloudinary();
+            $cloudinaryResponse = $cloudinary->uploadApi()->upload($request->file('image')->getRealPath(), [
+                'resource_type' => 'image',
+                'folder' => 'visiting-angels/testimonials'
+            ]);
+            $validated['image_url'] = $cloudinaryResponse['secure_url'];
+        }
+
         Testimonial::create($validated);
         return redirect()->route('admin.testimonials.index')->with('success', 'Testimonial created');
     }
@@ -44,10 +56,22 @@ class TestimonialController extends Controller
             'name' => 'required|string|max:255',
             'role' => 'nullable|string|max:255',
             'quote' => 'required|string',
-            'image_url' => 'nullable|url',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'is_published' => 'in:0,1',
         ]);
+        
         $validated['is_published'] = $request->boolean('is_published');
+
+        // Handle image upload to Cloudinary
+        if ($request->hasFile('image')) {
+            $cloudinary = new Cloudinary();
+            $cloudinaryResponse = $cloudinary->uploadApi()->upload($request->file('image')->getRealPath(), [
+                'resource_type' => 'image',
+                'folder' => 'visiting-angels/testimonials'
+            ]);
+            $validated['image_url'] = $cloudinaryResponse['secure_url'];
+        }
+
         $testimonial->update($validated);
         return redirect()->route('admin.testimonials.index')->with('success', 'Testimonial updated');
     }
