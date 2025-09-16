@@ -56,8 +56,8 @@
                     <label class="block text-sm font-semibold text-gray-700 mb-4">Service Status</label>
                     <div class="flex items-center gap-6">
                         <div class="flex items-center gap-3">
-                            <label class="relative inline-flex items-center cursor-pointer">
-                                <input type="checkbox" name="is_active" value="1" class="sr-only peer" {{ $service->is_active ? 'checked' : '' }}>
+                            <label for="is_active" class="relative inline-flex items-center cursor-pointer">
+                                <input type="checkbox" id="is_active" name="is_active" value="1" class="sr-only peer" {{ $service->is_active ? 'checked' : '' }}>
                                 <div class="w-14 h-8 bg-gray-200 rounded-full peer peer-checked:bg-green-500 transition-all duration-300 shadow-inner"></div>
                                 <div class="absolute left-1 top-1 w-6 h-6 bg-white rounded-full transition-all duration-300 shadow-md peer-checked:translate-x-6"></div>
                             </label>
@@ -118,6 +118,20 @@
     });
     
     quillService.root.innerHTML = @json(old('body', $service->body));
+    
+    // Toggle button functionality
+    document.querySelector('input[name="is_active"]').addEventListener('change', function() {
+        // The CSS will handle the visual toggle automatically
+        console.log('Toggle status:', this.checked);
+    });
+    
+    // Add click handler to the toggle button
+    document.querySelector('label[for="is_active"]').addEventListener('click', function(e) {
+        e.preventDefault();
+        const checkbox = document.querySelector('input[name="is_active"]');
+        checkbox.checked = !checkbox.checked;
+        checkbox.dispatchEvent(new Event('change'));
+    });
     
     document.querySelector('form').addEventListener('submit', function() {
         document.getElementById('service-body').value = quillService.root.innerHTML;

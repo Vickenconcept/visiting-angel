@@ -54,9 +54,9 @@
                     <label class="block text-sm font-semibold text-gray-700 mb-4">Publication Settings</label>
                     <div class="grid md:grid-cols-2 gap-6">
                         <div class="flex items-center gap-3">
-                            <label class="relative inline-flex items-center cursor-pointer">
-                                <input type="checkbox" name="is_published" value="1" class="sr-only peer">
-                                <div class="w-14 h-8 bg-gray-200 rounded-full peer peer-checked:bg-purple-500 transition-all duration-300 shadow-inner"></div>
+                            <label for="is_published" class="relative inline-flex items-center cursor-pointer">
+                                <input type="checkbox" id="is_published" name="is_published" value="1" class="sr-only peer">
+                                <div class="w-14 h-8 bg-gray-200 rounded-full peer peer-checked:bg-green-500 transition-all duration-300 shadow-inner"></div>
                                 <div class="absolute left-1 top-1 w-6 h-6 bg-white rounded-full transition-all duration-300 shadow-md peer-checked:translate-x-6"></div>
                             </label>
                             <span class="text-sm font-medium text-gray-700">Publish Now</span>
@@ -118,6 +118,18 @@
         modules: {
             toolbar: toolbarBlogOptions
         }
+    });
+    
+    // Toggle button functionality
+    document.querySelector('input[name="is_published"]').addEventListener('change', function() {
+        console.log('Publish status:', this.checked);
+    });
+    
+    document.querySelector('label[for="is_published"]').addEventListener('click', function(e) {
+        e.preventDefault();
+        const checkbox = document.querySelector('input[name="is_published"]');
+        checkbox.checked = !checkbox.checked;
+        checkbox.dispatchEvent(new Event('change'));
     });
     
     const form = document.querySelector('form');
