@@ -104,30 +104,7 @@
             </div>
         </section>
 
-        <!-- Newsletter Signup -->
-        <section class="py-20 bg-gradient-to-r from-indigo-50 to-purple-50 relative overflow-hidden">
-            <div class="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="none" fill-rule="evenodd"%3E%3Cg fill="%23e0e7ff" fill-opacity="0.1"%3E%3Ccircle cx="30" cy="30" r="2"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-30"></div>
-            <div class="max-w-4xl mx-auto px-4 text-center relative z-10">
-                <div class="bg-white rounded-3xl shadow-2xl shadow-gray-200 p-12 relative overflow-hidden">
-                    <div class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-indigo-600 to-purple-600"></div>
-                    <div class="relative z-10">
-                        <h2 class="text-4xl font-bold text-gray-900 mb-6">Stay Updated</h2>
-                        <p class="text-xl text-gray-600 mb-8 leading-relaxed">
-                            Get the latest healthcare insights, industry news, and expert tips delivered directly to your inbox.
-                        </p>
-                        <div class="flex flex-col sm:flex-row gap-4 justify-center max-w-md mx-auto">
-                            <input type="email" placeholder="Enter your email" class="flex-1 px-6 py-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-300">
-                            <button class="bg-indigo-600 text-white px-8 py-4 rounded-xl font-semibold hover:bg-indigo-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1">
-                                Subscribe
-                            </button>
-                        </div>
-                    </div>
-                    <!-- Decorative elements -->
-                    <div class="absolute -top-4 -right-4 w-24 h-24 bg-indigo-100 rounded-full opacity-50"></div>
-                    <div class="absolute -bottom-4 -left-4 w-16 h-16 bg-purple-100 rounded-full opacity-50"></div>
-                </div>
-            </div>
-        </section>
+       
     </div>
 </x-guest-layout>
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Opening;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Mail;
 
 class OpeningController extends Controller
 {
@@ -46,7 +47,25 @@ class OpeningController extends Controller
         $validated['is_active'] = $request->boolean('is_active');
         $validated['is_published'] = $request->boolean('is_published');
 
-        Opening::create($validated);
+		$opening = Opening::create($validated);
+
+		$recipient = env('MAIL_CONTACT_RECIPIENT');
+		if (!empty($recipient)) {
+			$subject = 'New Job Opening Created: ' . $opening->title;
+			$lines = [
+				'Title: ' . ($opening->title ?? ''),
+				'Location: ' . ($opening->location ?? 'N/A'),
+				'Employment Type: ' . ($opening->employment_type ?? 'N/A'),
+				'Salary: ' . ($opening->salary ?? 'N/A'),
+				'Published: ' . ($opening->is_published ? 'Yes' : 'No'),
+				'Active: ' . ($opening->is_active ? 'Yes' : 'No'),
+			];
+			$body = "A new job opening has been created on the site.\n\n" . implode("\n", $lines) . "\n\nView: " . route('openings.show', $opening->slug);
+
+			Mail::raw($body, function ($message) use ($recipient, $subject) {
+				$message->to($recipient)->subject($subject);
+			});
+		}
         return redirect()->route('admin.openings.index')->with('success', 'Opening created');
     }
 

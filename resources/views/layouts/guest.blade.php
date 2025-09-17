@@ -40,7 +40,10 @@
     <header class="bg-white shadow-sm sticky top-0 z-30">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center py-4">
-                <a href="/" class="text-2xl font-bold text-black">Visiting Angels</a>
+                <a href="/" class="text-2xl font-bold text-black">
+                    <img src="{{ asset('images/logo.png') }}" alt="Visiting Angels" class="w-28 border">
+                </a>
+                {{-- <a href="/" class="text-2xl font-bold text-black">Visiting Angels</a> --}}
                 <nav class="hidden md:flex items-center gap-6">
                     <a href="/" class="text-gray-700 hover:text-orange-500">Home</a>
                     <a href="{{ route('about') }}" class="text-gray-700 hover:text-orange-500">About</a>
