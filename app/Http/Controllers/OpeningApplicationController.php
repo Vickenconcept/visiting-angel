@@ -16,10 +16,18 @@ class OpeningApplicationController extends Controller
         }
         $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|email',
+            'email' => 'required|email|max:255|regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/',
             'phone' => 'nullable|string|max:50',
             'resume' => 'nullable|file|mimes:pdf,doc,docx|max:10000',
-            'message' => 'nullable|string',
+            'message' => 'nullable|string|max:1000',
+        ], [
+            'email.required' => 'Email address is required.',
+            'email.email' => 'Please enter a valid email address.',
+            'email.regex' => 'Please enter a valid email address format.',
+            'name.required' => 'Full name is required.',
+            'name.max' => 'Name cannot exceed 255 characters.',
+            'email.max' => 'Email address cannot exceed 255 characters.',
+            'message.max' => 'Message cannot exceed 1000 characters.',
         ]);
 
         $resumeUrl = null;
@@ -58,12 +66,22 @@ class OpeningApplicationController extends Controller
     public function adminIndex()
     {
         $status = request('status');
+        $startDate = request('start_date');
+        $endDate = request('end_date');
+
         $applications = OpeningApplication::with('opening')
             ->when($status, fn($q) => $q->where('status', $status))
+            ->when($startDate, fn($q) => $q->whereDate('created_at', '>=', $startDate))
+            ->when($endDate, fn($q) => $q->whereDate('created_at', '<=', $endDate))
             ->latest()
             ->paginate(20)
-            ->appends(['status' => $status]);
-        return view('admin.applications.index', compact('applications', 'status'));
+            ->appends([
+                'status' => $status,
+                'start_date' => $startDate,
+                'end_date' => $endDate,
+            ]);
+
+        return view('admin.applications.index', compact('applications', 'status', 'startDate', 'endDate'));
     }
 
     public function updateStatus(OpeningApplication $application, Request $request)

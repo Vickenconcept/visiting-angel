@@ -57,20 +57,36 @@
                                 <h2 class="text-3xl font-bold text-gray-900 mb-4">Apply for this Position</h2>
                                 <p class="text-gray-600 text-lg">Ready to join our team? Fill out the application form below.</p>
                             </div>
-                            <form action="{{ route('openings.apply', $opening->slug) }}" method="POST" enctype="multipart/form-data" class="space-y-6">
+                            <form x-data="{ isSubmitting:false }" @submit="isSubmitting=true" action="{{ route('openings.apply', $opening->slug) }}" method="POST" enctype="multipart/form-data" class="space-y-6">
                                 @csrf
                                 <div class="grid md:grid-cols-2 gap-6">
                                     <div>
                                         <label class="block text-sm font-semibold text-gray-700 mb-2">Full Name *</label>
-                                        <input type="text" name="name" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-colors duration-300" required>
+                                        <input type="text" name="name" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-colors duration-300 @error('name') border-red-500 @enderror" 
+                                               value="{{ old('name') }}" 
+                                               required>
+                                        @error('name')
+                                            <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                                        @enderror
                                     </div>
                                     <div>
                                         <label class="block text-sm font-semibold text-gray-700 mb-2">Email Address *</label>
-                                        <input type="email" name="email" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-colors duration-300" required>
+                                        <input type="email" name="email" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-colors duration-300 @error('email') border-red-500 @enderror" 
+                                               value="{{ old('email') }}" 
+                                               required 
+                                               pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                                               title="Please enter a valid email address">
+                                        @error('email')
+                                            <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                                        @enderror
                                     </div>
                                     <div>
                                         <label class="block text-sm font-semibold text-gray-700 mb-2">Phone Number</label>
-                                        <input type="text" name="phone" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-colors duration-300">
+                                        <input type="text" name="phone" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-colors duration-300 @error('phone') border-red-500 @enderror" 
+                                               value="{{ old('phone') }}">
+                                        @error('phone')
+                                            <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                                        @enderror
                                     </div>
                                     <div>
                                         <label class="block text-sm font-semibold text-gray-700 mb-2">Resume (PDF/DOC)</label>
@@ -79,16 +95,32 @@
                                 </div>
                                 <div>
                                     <label class="block text-sm font-semibold text-gray-700 mb-2">Cover Letter / Message</label>
-                                    <textarea name="message" rows="6" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-colors duration-300 resize-none" placeholder="Tell us why you're interested in this position..."></textarea>
+                                    <textarea name="message" rows="6" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-colors duration-300 resize-none @error('message') border-red-500 @enderror" 
+                                              placeholder="Tell us why you're interested in this position...">{{ old('message') }}</textarea>
+                                    @error('message')
+                                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                                    @enderror
                                 </div>
                                 <div class="text-center">
-                                    <button class="bg-emerald-600 text-white px-8 py-4 rounded-xl font-semibold hover:bg-emerald-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1">
-                                        <span class="flex items-center justify-center">
-                                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
-                                            </svg>
-                                            Submit Application
-                                        </span>
+                                    <button :disabled="isSubmitting" class="bg-emerald-600 text-white px-8 py-4 rounded-xl font-semibold transition-all duration-300 shadow-lg flex items-center justify-center mx-auto"
+                                            :class="isSubmitting ? 'opacity-60 cursor-not-allowed' : 'hover:bg-emerald-700 hover:shadow-xl transform hover:-translate-y-1'">
+                                        <template x-if="!isSubmitting">
+                                            <span class="flex items-center justify-center">
+                                                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
+                                                </svg>
+                                                Submit Application
+                                            </span>
+                                        </template>
+                                        <template x-if="isSubmitting">
+                                            <span class="flex items-center justify-center">
+                                                <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
+                                                </svg>
+                                                Submitting...
+                                            </span>
+                                        </template>
                                     </button>
                                 </div>
                             </form>

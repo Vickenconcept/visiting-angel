@@ -5,6 +5,13 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Visiting Angels Home Healthcare Inc.</title>
+    @seo([
+        'title' => 'Visiting Angels',
+        'description' => 'Home Healthcare Staffing Agency',
+        'image' => asset('images/login-image.png'),
+        'site_name' => config('app.name'),
+        'favicon' => asset('favicon.ico'),
+    ])
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -23,10 +30,13 @@
     <!-- Header -->
     <header class="bg-white shadow-sm sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center py-4">
+            <div class="flex justify-between items-center py-1">
                 <!-- Logo -->
                 <div class="flex items-center">
-                    <a href="/" class="text-2xl font-bold text-black">Visiting Angels</a>
+                    {{-- <a href="/" class="text-2xl font-bold text-black">Visiting Angels</a> --}}
+                    <div class="w-20 overflow-hidden border-2 border-orange-400 rounded-full flex items-center justify-center">
+                        <img src="{{ asset('images/logo.png') }}" alt="Visiting Angels" class="object-cover">
+                    </div>
                 </div>
 
                 <!-- Social Media & CTA -->

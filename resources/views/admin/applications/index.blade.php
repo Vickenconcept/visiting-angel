@@ -9,6 +9,9 @@
                 <p class="text-gray-600 text-lg">Review and manage job applications from candidates</p>
             </div>
             <form method="GET" class="flex items-center gap-3">
+                <input type="date" name="start_date" value="{{ request('start_date') }}" class="border border-gray-300 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-colors duration-300" />
+                <span class="text-gray-500">to</span>
+                <input type="date" name="end_date" value="{{ request('end_date') }}" class="border border-gray-300 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-colors duration-300" />
                 <select name="status" class="border border-gray-300 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-colors duration-300">
                     <option value="">All Statuses</option>
                     @foreach(['pending','reviewed','shortlisted','rejected','hired'] as $opt)
@@ -19,6 +22,7 @@
                     <i class='bx bx-filter text-lg mr-2'></i>
                     Filter
                 </button>
+                <a href="{{ route('admin.applications.index') }}" class="px-4 py-2 rounded-xl border border-gray-300 text-gray-700 hover:bg-gray-100 transition-colors duration-300">Reset</a>
             </form>
         </div>
     </div>
@@ -127,7 +131,7 @@
                 </div>
 
                 <div class="px-6 py-4 bg-gray-50 border-t border-gray-100">
-                    {{ $applications->links() }}
+                    {{ $applications->onEachSide(1)->links() }}
                 </div>
             </div>
         </div>

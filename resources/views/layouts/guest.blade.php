@@ -39,9 +39,11 @@
     </marquee>
     <header class="bg-white shadow-sm sticky top-0 z-30">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center py-4">
+            <div class="flex justify-between items-center py-1">
                 <a href="/" class="text-2xl font-bold text-black">
-                    <img src="{{ asset('images/logo.png') }}" alt="Visiting Angels" class="w-28 border">
+                   <div class="w-20 overflow-hidden  border-2 border-orange-400 rounded-full flex items-center justify-center">
+                    <img src="{{ asset('images/logo.png') }}" alt="Visiting Angels" class="object-cover">
+                   </div>
                 </a>
                 {{-- <a href="/" class="text-2xl font-bold text-black">Visiting Angels</a> --}}
                 <nav class="hidden md:flex items-center gap-6">
