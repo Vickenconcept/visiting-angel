@@ -66,7 +66,7 @@
                                         </div>
                                         <div>
                                             <h3 class="text-lg font-semibold text-gray-900 mb-1">Phone</h3>
-                                            <p class="text-gray-600">703 344 0044</p>
+                                            <p class="text-gray-600">703 344 0044 </p>
                                         </div>
                                     </div>
 

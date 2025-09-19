@@ -414,7 +414,7 @@
                     <h4 class="font-semibold mb-4">Contact Us</h4>
                     <div class="space-y-2 text-gray-400">
                         <p>15426 Bevanwood Dr, Woodbridge, VA, 22193-5716</p>
-                        <p>301 395 7085</p>
+                        <p>703 344 0044</p>
                         <p>healthcare@Visitingangelshealth.com</p>
                     </div>
                 </div>

@@ -93,6 +93,7 @@ Route::middleware(['auth','admin'])->prefix('admin')->name('admin.')->group(func
 
     Route::get('/applications', [OpeningApplicationController::class, 'adminIndex'])->name('applications.index');
     Route::put('/applications/{application}', [OpeningApplicationController::class, 'updateStatus'])->name('applications.update');
+    Route::delete('/applications/{application}', [OpeningApplicationController::class, 'destroy'])->name('applications.destroy');
 
     // Testimonials
     Route::get('/testimonials', [TestimonialController::class, 'index'])->name('testimonials.index');

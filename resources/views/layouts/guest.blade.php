@@ -70,7 +70,7 @@
                 </div>
                 <div>
                     <h4 class="font-semibold">Contact</h4>
-                    <p class="text-gray-400 mt-2">Phone: 301 395 7085</p>
+                    <p class="text-gray-400 mt-2">Phone: 703 344 0044</p>
                     <p class="text-gray-400">Email: healthcare@Visitingangelshealth.com</p>
                     <p class="text-gray-400">Address: 15426  Bevanwood Dr, Woodbridge, VA, 22193-5716</p>
                 </div>

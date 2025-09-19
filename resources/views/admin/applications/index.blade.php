@@ -27,7 +27,7 @@
     <div class="bg-white rounded-3xl shadow-2xl shadow-gray-200 overflow-hidden relative">
         <div class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-cyan-600 to-blue-600"></div>
         <div class="p-6">
-            <div x-data="{ open:false, url:null, isPdf:false }" @keydown.escape.window="open=false" class="relative">
+            <div x-data="{ open:false, url:null, isPdf:false, tryGoogleViewer:false, tryOfficeViewer:false }" @keydown.escape.window="open=false" class="relative">
                 <div class="overflow-x-auto">
                     <table class="w-full">
                         <thead>
@@ -51,8 +51,7 @@
                                             <div class="font-semibold text-gray-900">{{ $app->name }}</div>
                                             <div class="text-sm text-gray-500">{{ $app->email }} · {{ $app->phone }}</div>
                                             @if($app->resume_path)
-                                            @php $resumeUrl = \Illuminate\Support\Facades\Storage::disk('public')->url($app->resume_path); @endphp
-                                            <button type="button" class="text-cyan-600 text-sm underline hover:text-cyan-700 transition-colors duration-300" @click="url='{{ $resumeUrl }}'; isPdf = url.toLowerCase().endsWith('.pdf'); open=true;">
+                                            <button type="button" class="text-cyan-600 text-sm underline hover:text-cyan-700 transition-colors duration-300" @click="url='{{ $app->resume_path }}'; isPdf = url.toLowerCase().includes('.pdf') || url.toLowerCase().endsWith('.pdf'); open=true;">
                                                 <i class='bx bx-file text-xs mr-1'></i>
                                                 View Resume
                                             </button>
@@ -77,19 +76,29 @@
                                 </td>
                                 <td class="p-4 text-gray-600">{{ $app->created_at->diffForHumans() }}</td>
                                 <td class="p-4 text-right">
-                                    <form action="{{ route('admin.applications.update', $app) }}" method="POST" class="inline-flex items-center gap-3">
-                                        @csrf
-                                        @method('PUT')
-                                        <select name="status" class="border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-colors duration-300">
-                                            @foreach(['pending','reviewed','shortlisted','rejected','hired'] as $status)
-                                                <option value="{{ $status }}" {{ $app->status === $status ? 'selected' : '' }}>{{ ucfirst($status) }}</option>
-                                            @endforeach
-                                        </select>
-                                        <button class="bg-gradient-to-r from-cyan-600 to-blue-600 text-white px-4 py-2 rounded-lg font-medium hover:from-cyan-700 hover:to-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1">
-                                            <i class='bx bx-check text-sm mr-1'></i>
-                                            Update
-                                        </button>
-                                    </form>
+                                    <div class="flex items-center gap-3">
+                                        <form action="{{ route('admin.applications.update', $app) }}" method="POST" class="inline-flex items-center gap-3">
+                                            @csrf
+                                            @method('PUT')
+                                            <select name="status" class="border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-colors duration-300">
+                                                @foreach(['pending','reviewed','shortlisted','rejected','hired'] as $status)
+                                                    <option value="{{ $status }}" {{ $app->status === $status ? 'selected' : '' }}>{{ ucfirst($status) }}</option>
+                                                @endforeach
+                                            </select>
+                                            <button class="bg-gradient-to-r from-cyan-600 to-blue-600 text-white px-4 py-2 rounded-lg font-medium hover:from-cyan-700 hover:to-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 flex items-center gap-2">
+                                                <i class='bx bx-check text-sm mr-1'></i>
+                                                Update
+                                            </button>
+                                        </form>
+                                        <form action="{{ route('admin.applications.destroy', $app) }}" method="POST" class="inline" onsubmit="return confirm('Are you sure you want to delete this application? This action cannot be undone.')">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="bg-gradient-to-r from-red-600 to-red-700 text-white px-4 py-2 rounded-lg font-medium hover:from-red-700 hover:to-red-800 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 flex items-center gap-2">
+                                                <i class='bx bx-trash text-sm mr-1'></i>
+                                                Delete
+                                            </button>
+                                        </form>
+                                    </div>
                                 </td>
                             </tr>
                             @endforeach
@@ -108,22 +117,10 @@
                         </div>
                         <div class="w-full h-full">
                             <template x-if="isPdf">
-                                <iframe :src="url" class="w-full h-full" type="application/pdf"></iframe>
+                                <iframe :src="url + '#toolbar=1&navpanes=1&scrollbar=1'" class="w-full h-full" type="application/pdf"></iframe>
                             </template>
                             <template x-if="!isPdf">
-                                <div class="h-full flex flex-col items-center justify-center gap-6 p-8">
-                                    <div class="w-20 h-20 bg-cyan-100 rounded-full flex items-center justify-center">
-                                        <i class='bx bx-file text-4xl text-cyan-600'></i>
-                                    </div>
-                                    <div class="text-center">
-                                        <h4 class="text-xl font-semibold text-gray-900 mb-2">Document Preview Not Available</h4>
-                                        <p class="text-gray-600 mb-6">This file type cannot be previewed inline. Click below to open in a new tab.</p>
-                                        <a :href="url" target="_blank" class="bg-gradient-to-r from-cyan-600 to-blue-600 text-white px-6 py-3 rounded-xl font-semibold hover:from-cyan-700 hover:to-blue-700 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1">
-                                            <i class='bx bx-external-link text-lg mr-2'></i>
-                                            Open Document
-                                        </a>
-                                    </div>
-                                </div>
+                                <iframe :src="'https://docs.google.com/gview?url=' + encodeURIComponent(url) + '&embedded=true'" class="w-full h-full" frameborder="0"></iframe>
                             </template>
                         </div>
                     </div>
