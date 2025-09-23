@@ -44,14 +44,14 @@
                     <div class="w-24 h-1 bg-gradient-to-r from-rose-600 to-pink-600 mx-auto rounded-full mt-6"></div>
                 </div>
 
-                <div class="grid lg:grid-cols-2 gap-12">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
                     <!-- Contact Information -->
-                    <div class="space-y-8">
+                    <div class="space-y-6 lg:space-y-8">
                         <div class="bg-white rounded-3xl shadow-2xl shadow-gray-200 p-8 relative overflow-hidden">
                             <div class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-rose-600 to-pink-600">
                             </div>
                             <div class="relative z-10">
-                                <h2 class="text-3xl font-bold text-gray-900 mb-8">Contact Information</h2>
+                                <h2 class="text-2xl lg:text-3xl font-bold text-gray-900 mb-6 lg:mb-8">Contact Information</h2>
 
                                 <div class="space-y-6">
                                     <div class="flex items-start space-x-4">
@@ -112,11 +112,11 @@
                             </div>
                         </div>
                         <!-- Business Hours -->
-                        <div class="bg-white rounded-3xl shadow-2xl shadow-gray-200 p-8 relative overflow-hidden">
+                        <div class="bg-white rounded-3xl shadow-2xl shadow-gray-200 p-6 lg:p-8 relative overflow-hidden">
                             <div class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-rose-600 to-pink-600">
                             </div>
                             <div class="relative z-10">
-                                <h3 class="text-2xl font-bold text-gray-900 mb-6">Business Hours</h3>
+                                <h3 class="text-xl lg:text-2xl font-bold text-gray-900 mb-4 lg:mb-6">Business Hours</h3>
                                 <div class="space-y-3">
                                     <div class="flex justify-between">
                                         <span class="text-gray-600">Monday - Friday</span>
@@ -140,11 +140,11 @@
                         </div>
                     </div>
                     <!-- Contact Form -->
-                    <div class="bg-white rounded-3xl shadow-2xl shadow-gray-200 p-8 relative overflow-hidden">
+                    <div class="bg-white rounded-3xl shadow-2xl shadow-gray-200 p-6 lg:p-8 relative overflow-hidden">
                         <div class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-rose-600 to-pink-600">
                         </div>
                         <div class="relative z-10">
-                            <h2 class="text-3xl font-bold text-gray-900 mb-8">Send us a Message</h2>
+                            <h2 class="text-2xl lg:text-3xl font-bold text-gray-900 mb-6 lg:mb-8">Send us a Message</h2>
 
                             <form action="{{ route('contact.send') }}" method="POST" class="space-y-6">
                                 @csrf
@@ -157,19 +157,19 @@
                                 <!-- Hidden subject field -->
                                 <input type="hidden" name="subject" value="Contact Form Message">
 
-                                <div class="grid md:grid-cols-2 gap-6">
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                                     <div>
                                         <label class="block text-sm font-semibold text-gray-700 mb-2">Full Name
                                             *</label>
                                         <input type="text" name="name"
-                                            class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-rose-500 focus:border-transparent transition-colors duration-300"
+                                            class="w-full px-3 py-2 md:px-4 md:py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-rose-500 focus:border-transparent transition-colors duration-300"
                                             required>
                                     </div>
                                     <div>
                                         <label class="block text-sm font-semibold text-gray-700 mb-2">Email
                                             Address *</label>
                                         <input type="email" name="email"
-                                            class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-rose-500 focus:border-transparent transition-colors duration-300"
+                                            class="w-full px-3 py-2 md:px-4 md:py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-rose-500 focus:border-transparent transition-colors duration-300"
                                             required>
                                     </div>
                                 </div>
@@ -178,12 +178,12 @@
                                     <label class="block text-sm font-semibold text-gray-700 mb-2">Message
                                         *</label>
                                     <textarea name="message" rows="6"
-                                        class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-rose-500 focus:border-transparent transition-colors duration-300 resize-none"
+                                        class="w-full px-3 py-2 md:px-4 md:py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-rose-500 focus:border-transparent transition-colors duration-300 resize-none"
                                         placeholder="Tell us how we can help you..." required></textarea>
                                 </div>
 
                                  <button type="submit" id="submit-btn"
-                                     class="w-full bg-rose-600 text-white px-8 py-4 rounded-xl font-semibold hover:bg-rose-700 transition-colors duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none">
+                                     class="w-full bg-rose-600 text-white px-6 py-3 md:px-8 md:py-4 rounded-xl font-semibold hover:bg-rose-700 transition-colors duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none">
                                      <span id="button-text" class="flex items-center justify-center">
                                          <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor"
                                              viewBox="0 0 24 24">
@@ -228,9 +228,9 @@
                     <div class="w-24 h-1 bg-gradient-to-r from-rose-600 to-pink-600 mx-auto rounded-full mt-6"></div>
                 </div>
 
-                <div class="grid md:grid-cols-3 gap-8">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
                     <div
-                        class="bg-white rounded-2xl shadow-2xl shadow-gray-200 p-8 text-center hover:shadow-3xl transition-all duration-300 hover:-translate-y-2">
+                        class="bg-white rounded-2xl shadow-2xl shadow-gray-200 p-6 lg:p-8 text-center hover:shadow-3xl transition-all duration-300 hover:-translate-y-2">
                         <div class="w-16 h-16 bg-rose-100 rounded-full flex items-center justify-center mx-auto mb-6">
                             <svg class="w-8 h-8 text-rose-600" fill="none" stroke="currentColor"
                                 viewBox="0 0 24 24">
@@ -243,7 +243,7 @@
                             staffing needs.</p>
                     </div>
                     <div
-                        class="bg-white rounded-2xl shadow-2xl shadow-gray-200 p-8 text-center hover:shadow-3xl transition-all duration-300 hover:-translate-y-2">
+                        class="bg-white rounded-2xl shadow-2xl shadow-gray-200 p-6 lg:p-8 text-center hover:shadow-3xl transition-all duration-300 hover:-translate-y-2">
                         <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6">
                             <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor"
                                 viewBox="0 0 24 24">
@@ -257,7 +257,7 @@
                             background checked.</p>
                     </div>
                     <div
-                        class="bg-white rounded-2xl shadow-2xl shadow-gray-200 p-8 text-center hover:shadow-3xl transition-all duration-300 hover:-translate-y-2">
+                        class="bg-white rounded-2xl shadow-2xl shadow-gray-200 p-6 lg:p-8 text-center hover:shadow-3xl transition-all duration-300 hover:-translate-y-2">
                         <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
                             <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor"
                                 viewBox="0 0 24 24">

@@ -38,7 +38,7 @@
                 </div>
                 
                 @if($services->count() > 0)
-                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                         @foreach($services as $service)
                         <div class="group bg-white rounded-2xl shadow-2xl shadow-gray-200 overflow-hidden hover:shadow-3xl transition-all duration-300 hover:-translate-y-2 relative">
                             <div class="absolute inset-0 bg-gradient-to-br from-blue-50 to-cyan-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
@@ -88,7 +88,7 @@
 
                 @if($services->hasPages())
                     <div class="mt-16 flex justify-center">
-                        <div class="bg-white rounded-2xl shadow-2xl shadow-gray-200 p-4">
+                        <div class="bg-white rounded-2xl shadow-2xl shadow-gray-200 p-4 w-full">
                             {{ $services->links() }}
                         </div>
                     </div>

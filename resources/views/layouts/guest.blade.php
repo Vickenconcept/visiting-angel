@@ -21,6 +21,7 @@
 
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -39,13 +40,19 @@
     </marquee>
     <header class="bg-white shadow-sm sticky top-0 z-30">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center py-1">
+            <div class="flex justify-between items-center py-1 flex-wrap">
                 <a href="/" class="text-2xl font-bold text-black">
                    <div class="w-20 overflow-hidden  border-2 border-orange-400 rounded-full flex items-center justify-center">
                     <img src="{{ asset('images/logo.png') }}" alt="Visiting Angels" class="object-cover">
                    </div>
                 </a>
                 {{-- <a href="/" class="text-2xl font-bold text-black">Visiting Angels</a> --}}
+                <div class="flex items-center gap-4">
+                    <button id="mobile-nav-toggle" class="md:hidden p-2 text-gray-700 hover:text-orange-500 transition-colors" aria-expanded="false" aria-controls="mobile-nav">
+                        <span class="sr-only">Toggle navigation</span>
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
                 <nav class="hidden md:flex items-center gap-6">
                     <a href="/" class="text-gray-700 hover:text-orange-500">Home</a>
                     <a href="{{ route('about') }}" class="text-gray-700 hover:text-orange-500">About</a>
@@ -54,6 +61,16 @@
                     <a href="{{ route('openings.index') }}" class="text-gray-700 hover:text-orange-500">Jobs</a>
                     <a href="{{ route('contact') }}" class="text-gray-700 hover:text-orange-500">Contact</a>
                 </nav>
+                <div id="mobile-nav" class="w-full md:hidden hidden border-t border-gray-200 py-2">
+                    <ul class="flex flex-col divide-y divide-gray-100">
+                        <li><a href="/" class="block px-2 py-3 text-gray-700 hover:text-orange-500">Home</a></li>
+                        <li><a href="{{ route('about') }}" class="block px-2 py-3 text-gray-700 hover:text-orange-500">About</a></li>
+                        <li><a href="{{ route('services.index') }}" class="block px-2 py-3 text-gray-700 hover:text-orange-500">Services</a></li>
+                        <li><a href="{{ route('blog.index') }}" class="block px-2 py-3 text-gray-700 hover:text-orange-500">Blog</a></li>
+                        <li><a href="{{ route('openings.index') }}" class="block px-2 py-3 text-gray-700 hover:text-orange-500">Jobs</a></li>
+                        <li><a href="{{ route('contact') }}" class="block px-2 py-3 text-gray-700 hover:text-orange-500">Contact</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
     </header>
@@ -73,7 +90,7 @@
                 <div>
                     <h4 class="font-semibold">Contact</h4>
                     <p class="text-gray-400 mt-2">Phone: 703 344 0044</p>
-                    <p class="text-gray-400">Email: healthcare@Visitingangelshealth.com</p>
+                    <p class="text-gray-400">Email: <span class="text-sm">healthcare@Visitingangelshealth.com</span></p>
                     <p class="text-gray-400">Address: 15426  Bevanwood Dr, Woodbridge, VA, 22193-5716</p>
                 </div>
                 <div>
@@ -91,6 +108,24 @@
             </div>
         </div>
 </footer>
+
+
+<script>
+    (function() {
+        const toggle = document.getElementById('mobile-nav-toggle');
+        const panel = document.getElementById('mobile-nav');
+        if (toggle && panel) {
+            toggle.addEventListener('click', function () {
+                const isHidden = panel.classList.contains('hidden');
+                panel.classList.toggle('hidden');
+                this.setAttribute('aria-expanded', String(isHidden));
+                this.innerHTML = isHidden
+                    ? '<span class="sr-only">Close navigation</span><i class="fas fa-times text-2xl"></i>'
+                    : '<span class="sr-only">Open navigation</span><i class="fas fa-bars text-2xl"></i>';
+            });
+        }
+    })();
+</script>
 
 </body>
 

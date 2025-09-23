@@ -2,7 +2,7 @@
     <!-- Hero Section -->
     <section class="relative overflow-hidden">
         <div class="absolute inset-0 bg-gradient-to-r from-blue-900/90 to-blue-700/90"></div>
-        <img src="https://plus.unsplash.com/premium_photo-1661775601929-8c775187bea6?w=1200&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Njl8fG51cnNlfGVufDB8fDB8fHww" alt="About Us" class="w-full h-[80vh] object-cover">
+        <img src="https://plus.unsplash.com/premium_photo-1661775601929-8c775187bea6?w=1200&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Njl8fG51cnNlfGVufDB8fDB8fHww" alt="About Us" class="w-full h-[45vh] sm:h-[60vh] md:h-[70vh] lg:h-[80vh] object-cover">
         <div class="absolute inset-0 flex items-center justify-center">
             <div class="text-center text-white max-w-4xl px-4">
                 <div class="mb-8">

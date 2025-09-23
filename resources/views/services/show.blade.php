@@ -27,7 +27,7 @@
                 @if($service->image_url)
                     <div class="mb-12">
                         <div class="relative overflow-hidden rounded-3xl shadow-2xl shadow-gray-200 group">
-                            <img src="{{ $service->image_url }}" alt="{{ $service->title }}" class="w-full h-96 object-cover group-hover:scale-105 transition-transform duration-300">
+                            <img src="{{ $service->image_url }}" alt="{{ $service->title }}" class="w-full h-64 sm:h-80 md:h-96 object-cover group-hover:scale-105 transition-transform duration-300">
                             <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
                         </div>
                     </div>

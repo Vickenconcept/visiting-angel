@@ -92,7 +92,7 @@
 
                 @if($openings->hasPages())
                     <div class="mt-16 flex justify-center">
-                        <div class="bg-white rounded-2xl shadow-2xl shadow-gray-200 p-4">
+                        <div class="bg-white rounded-2xl shadow-2xl shadow-gray-200 p-4 w-full">
                             {{ $openings->links() }}
                         </div>
                     </div>
